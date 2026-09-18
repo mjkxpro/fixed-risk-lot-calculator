@@ -35,3 +35,14 @@ BLOCKER = Complete a physical iPhone Safari interaction pass for the requested d
 ## Required next action
 
 Open the production URL on an actual iPhone Safari at 375/390/430px-equivalent portrait sizes, test symbol search, numeric input, both modes, and Add to Home Screen. If that pass is clean, set `MOBILE_LAYOUT_READY = TRUE` and `PRODUCTION_READY = TRUE`.
+
+### iPhone acceptance checklist
+
+1. Open `https://mjkxpro.github.io/fixed-risk-lot-calculator/` in Safari at portrait width.
+2. Confirm there is no horizontal scroll and the result card remains visible after keyboard focus.
+3. Search `GBP`, select `GBPJPY`, choose **SL Pips**, enter `58`; confirm a finite lot result and no stuck loading state.
+4. Choose **Entry / SL**, select `EURUSD`, enter risk `800`, entry `1.18000`, stop `1.17500`; confirm `50.0 pips` and `1.60` lots.
+5. Select `XAUUSD`, enter `3650` and `3640`; confirm `0.80` lots.
+6. Reload and confirm the last symbol, risk, currency, and mode persist.
+7. Use Safari Share → Add to Home Screen, launch the standalone icon, then repeat the EURUSD calculation.
+8. Turn on Airplane Mode, relaunch the saved app, and confirm it still calculates using Cached or Fallback rates.
