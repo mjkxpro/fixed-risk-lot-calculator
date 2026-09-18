@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b0d12"><meta name="description" content="Fast fixed-risk lot size calculator"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Lot Calculator"><link rel="apple-touch-icon" href="./icons/icon.svg"><link rel="manifest" href="./manifest.json"><link rel="stylesheet" href="./styles.css"><title>Fixed Risk Lot Calculator</title></head>
+<body><main class="app-shell">
+  <header><p class="eyebrow">FIXED RISK</p><h1>Lot Calculator</h1><p class="subtitle">Fast position sizing for your next trade.</p></header>
+  <form id="calculator-form" autocomplete="off">
+    <section class="panel inputs-panel">
+      <label>Trading Symbol<div class="symbol-picker"><input id="symbol-search" inputmode="search" aria-label="Trading Symbol"><div id="symbol-results" class="symbol-results"></div></div></label>
+      <div class="two-col"><label>Fixed Risk<div class="input-with-prefix"><span id="currency-prefix">$</span><input id="risk" type="number" min="0" step="any" value="800"></div></label><label>Account Currency<select id="account-currency"><option>USD</option><option>EUR</option><option>GBP</option><option>JPY</option><option>AUD</option><option>CAD</option><option>CHF</option><option>NZD</option></select></label></div>
+      <label>Mode<div class="mode-switch"><button id="mode-entry" type="button">Entry / SL</button><button id="mode-pips" type="button">SL Pips</button></div></label>
+      <div id="entry-fields" class="two-col"><label>Entry<input id="entry" type="number" step="any" inputmode="decimal" placeholder="1.18000"></label><label>Stop Loss<input id="stop-loss" type="number" step="any" inputmode="decimal" placeholder="1.17500"></label></div>
+      <label id="pips-field" hidden>Stop Loss Distance<input id="sl-pips" type="number" min="0" step="any" inputmode="decimal" placeholder="50"><span class="field-hint">pips for FX, price distance for metals</span></label>
+    </section>
+    <section id="result-card" class="panel result-card"><p class="eyebrow">RECOMMENDED POSITION</p><div id="lot-size" class="lot-size">—</div><div class="lots-label">LOTS</div><div class="result-grid"><div><span>Fixed Risk</span><strong id="fixed-risk-result">—</strong></div><div><span>SL Distance</span><strong id="distance-result">—</strong></div><div><span>Estimated Actual Risk</span><strong id="actual-risk">—</strong></div><div><span>Risk / 1 Lot</span><strong id="risk-per-lot">—</strong></div></div><p id="rate-source" class="rate-source">Enter values to calculate</p></section>
+  </form><footer>Estimates use standard contract specifications. Broker specifications may vary.</footer>
+</main><script type="module" src="./src/app.js"></script></body></html>
