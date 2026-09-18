@@ -6,6 +6,7 @@ import { loadSettings, saveSettings } from './storage.js';
 const $ = (id) => document.getElementById(id);
 const form = $('calculator-form');
 const state = { ...loadSettings(), symbol: loadSettings().symbol || 'EURUSD', fixedRisk: loadSettings().fixedRisk || 800, accountCurrency: loadSettings().accountCurrency || 'USD', mode: loadSettings().mode || 'entry' };
+let calculationRequestId = 0;
 
 function populateSymbols(filter = '') {
   const query = filter.trim().toUpperCase();
@@ -22,6 +23,7 @@ function setMode(mode) {
 function selectedSymbol() { return state.symbol || 'EURUSD'; }
 
 async function calculate() {
+  const requestId = ++calculationRequestId;
   const symbol = selectedSymbol(); const instrument = getInstrument(symbol); const risk = $('risk').value;
   const common = { symbol, risk, accountCurrency: $('account-currency').value };
   const input = state.mode === 'entry' ? { ...common, entry: $('entry').value, stopLoss: $('stop-loss').value } : { ...common, slPips: $('sl-pips').value };
@@ -29,6 +31,7 @@ async function calculate() {
   try {
     $('rate-source').textContent = 'Rates: loading…';
     const { rates, source } = await getRates(instrument.quoteCurrency, common.accountCurrency);
+    if (requestId !== calculationRequestId) return;
     const result = calculateLotSize({ ...input, rates }); result.rateSource = source;
     renderResult(result, instrument);
   } catch (error) { renderError(error.message); }

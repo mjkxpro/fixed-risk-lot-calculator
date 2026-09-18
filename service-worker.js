@@ -1,4 +1,4 @@
-const CACHE = 'fixed-risk-calculator-v1';
+const CACHE = 'fixed-risk-calculator-v2';
 const ASSETS = ['./','./index.html','./styles.css','./manifest.json','./src/app.js','./src/calculator.js','./src/instruments.js','./src/rates.js','./src/storage.js','./icons/icon.svg'];
 self.addEventListener('install', (event) => event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(ASSETS)).then(() => self.skipWaiting())));
 self.addEventListener('activate', (event) => event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key)))).then(() => self.clients.claim())));
